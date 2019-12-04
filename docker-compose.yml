@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+  app:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8002
+    ports:
+    - "8002:8002"
+    depends_on:
+    - db
+    environment:
+      PYTHONUNBUFFERED: 1

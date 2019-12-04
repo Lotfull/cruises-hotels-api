@@ -10,7 +10,7 @@ def cruises(request):
     context = dict()
     params = request.POST or request.GET
     try:
-        context = get_cruises(params.get('num', 4))
+        context = get_cruises(int(params.get('num', 4)))
     except Exception as e:
         context['error_message'] = str(e)
 

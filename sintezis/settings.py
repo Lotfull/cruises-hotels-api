@@ -26,11 +26,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', 'm28q_ssuki+wywz!#nr=43u6kkid@6fl)(=r+-)5z_!@jp9$^e')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = [os.environ['HOST_IP']] if 'HOST_IP' in os.environ else [
+ALLOWED_HOSTS = [os.environ['HOST_IP'], 'db'] if 'HOST_IP' in os.environ else [
     '127.0.0.1',
     'localhost',
+    'db'
 ]
 
 # Application definition
@@ -83,8 +84,9 @@ WSGI_APPLICATION = 'sintezis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', None),
         'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': 5432,
     }
