@@ -34,5 +34,5 @@ class HotelsAPI(generics.ListAPIView):
     serializer_class = HotelsSerializer
 
     def get_queryset(self):
-        rooms_limit = int(self.request.GET.get('rooms_limit', 20))
+        rooms_limit = int(self.request.GET.get('room_limit', 20))
         return Hotel.rooms_lt(rooms_limit)

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import dotenv
+
+dotenv.load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,13 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cs44@smpw_!x4+cw+7n-8h4@l_)pzu(nmi$prgbo_+e9=lss24'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'm28q_ssuki+wywz!#nr=43u6kkid@6fl)(=r+-)5z_!@jp9$^e')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = [os.environ['HOST_IP']] if 'HOST_IP' in os.environ else [
+    '127.0.0.1',
+    'localhost',
+]
 
 # Application definition
 
@@ -80,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'HOST': '127.0.0.1',
+        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
         'PORT': 5432,
     }
 }
