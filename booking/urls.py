@@ -4,5 +4,6 @@ from . import views
 
 app_name = 'booking'
 urlpatterns = [
+    path('api/cruises', views.CruisesAPI.as_view(), name='cruises'),
     path('api/hotels', views.HotelsAPI.as_view(), name='hotels'),
 ]
