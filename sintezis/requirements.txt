@@ -1,0 +1,6 @@
+requests
+django
+beautifulsoup4
+djangorestframework
+psycopg2
+python-dotenv
